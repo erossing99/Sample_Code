@@ -1,0 +1,41 @@
+Append:
+  O(n) because it would have to traverse down the list to add to the end
+  of it.
+
+Print:
+  O(n) because it would have to traverse through the whole list and print
+  off the data value.
+
+Add:
+  O(1) because it only has to add a node to the front of list every time.
+
+Concatenate:
+  O(n) because because in both the while loop and for loop it would have
+  to traverse the whole list until it gets to the end of the list.
+
+Delete:
+  O(n) because worst case scenario it would have to traverse through the
+  whole list to find the correct index.
+
+Get:
+  O(n) because worst case scenario it would have to traverse through the
+  whole list to find the correct index.
+
+Insert:
+  O(n) because worst case scenario it would have to traverse through the
+  whole list to find the correct index and it doesn't matter that there
+  is two while loops because you drop the coefficient when doing time
+  complexity.
+
+Length:
+  O(1) because it just performs one action, return length.
+
+Remove:
+  O(n) because worst case scenario it would have to traverse through the
+  whole list to find the correct item.
+
+Sort:
+  O(n^2) because there is a double nested for loop.
+
+Create:
+  O(1) because there is only one action performed, header.setNext(null).

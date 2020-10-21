@@ -1,0 +1,240 @@
+                              ____________
+
+                               A4 WRITEUP
+                              ____________
+
+
+- Name: Erik Rossing
+- NetID: rossi239
+
+Answer the questions below according to the assignment
+specification. Write your answers directly in this text file and submit
+it along with your code.
+
+
+PROBLEM 1: optimized_matrix_trans_mult_vec()
+============================================
+
+  Do your timing study on apollo.cselabs.umn.edu
+
+
+(A) Paste Source Code
+~~~~~~~~~~~~~~~~~~~~~
+
+  Paste a copy of your source code for the function
+  optimized_matrix_trans_mult_vec() below.
+
+  int optimized_matrix_trans_mult_vec(matrix_t mat, vector_t vec, vector_t res){
+    if(mat.rows != vec.len){  //error checking
+      printf("mat.rows (%ld) != vec.len (%ld)\n",mat.rows,vec.len);
+      return 1;
+    }
+
+    if(mat.cols != res.len){  //error checking
+      printf("mat.cols (%ld) != res.len (%ld)\n",mat.cols,res.len);
+      return 2;
+    }
+
+    for(int j=0; j < res.len; j++){ //setting matrix to zeros
+    VSET(res,j,0);
+  }
+
+    for (int i = 0; i < mat.rows ; i++){
+      int veci = VGET(vec,i);          //gets value in vec at index (i)
+      for (int j = 0; j < mat.cols ; j++){ // iterating through one row at a time allows for sequential memory access
+        int elij = MGET(mat,i,j); //gets value in matrix at position (i,j)
+        int newSum = VGET(res,j) + (elij * veci);  //retrieves current sum at index (j) and adds on product of elij and veci
+        VSET(res,j,newSum); //sets sum at index (j) to newSum
+      }
+    }
+    return 0;
+  }
+
+
+
+(B) Timing on Apollo
+~~~~~~~~~~~~~~~~~~~~
+
+  Paste a copy of the results of running `mult_bench' on
+  apollo.cselabs.umn.edu in the space below which shows how your
+  performance optimizations improved on the baseline codes.
+
+  ==== Matrix Mult Benchmark Version 2 ====
+    SIZE       BASE       NORM        OPT BSPDUP NSPDUP POINTS
+     512 8.5700e-04 7.0300e-04 3.9500e-04   2.17   1.78      1
+    1024 3.5510e-03 2.5650e-03 1.6010e-03   2.22   1.60      1
+    1101 1.5476e-02 2.9650e-03 1.9300e-03   8.02   1.54      4
+    2048 8.3079e-02 1.0266e-02 6.7910e-03  12.23   1.51      6
+    4096 3.9445e-01 4.1189e-02 2.7294e-02  14.45   1.51      7
+    8192 2.2048e+00 1.6497e-01 1.1001e-01  20.04   1.50     10
+  RAW POINTS: 29
+  TOTAL POINTS: 29 / 35
+
+(C) Optimizations
+~~~~~~~~~~~~~~~~~
+
+  Describe in some detail the optimizations you used to speed the code
+  up.  THE CODE SHOULD CONTAIN SOME COMMENTS already to describe these
+  but in the section below, describe in English the techniques you used
+  to make the code run faster.  Format your descriptions into discrete
+  chunks such as.
+        Optimization 1: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+
+        Optimization 2: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+
+        ...  Optimization N: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+  Full credit solutions will have a least two optimizations.
+
+  Optimiztion 1: I reordered the for loops to first iterate through each
+  index of a row and then move down to the next row after that is finished.
+  While doing this I would then add the value of the new column value times
+  the unchanged row value to the corresponding index in the res vector. This
+  should make the program run faster because I am accessing memory sequentially
+  and therefore it should take less time to make the calculation because each
+  row value I'm accessing is right next to the following value so it doesn't take
+  the processor that long to restart the operations performed in my second for loop.
+
+  Optimization 2: I reordered the arithmetic in my function so that all of it
+  is done with in one variable assignment for newSum. I did this because due to
+  parallel processing the processor can do multiplication and addition at the same time
+  and have the time be the same as doing each of these arithmetic on their own. So to make
+  my function run faster I got rid of the variables prod, curr, and next because each of these
+  had different arithmetic happening in them and rather made one variable newSum that gets
+  the current sum in res vector and adds this value to the product of the current mat value
+  and vec value.
+
+  Optimiztion 3: I put the assignment of the veci value (the value of vec that I would
+  be multiplying by) in the beginning of the first loop because throughout the second loop
+  it should not change values no matter what because its index value is determined by the
+  variable i which only changes once we exit the second for loop. This should make my program
+  run faster because it decreases the number of times we must access the memory for the vector
+  vec and only accesses this memory when the value veci would need to change for the arithmetic.
+
+
+PROBLEM 2: Timing Search Algorithms
+===================================
+
+  Do your timing study on apollo.cselabs.umn.edu. In most cases, report
+  times larger than 1e-03 seconds as times shorter than this are
+  unreliable. Run searches for more repetitions to lengthen run times.
+
+
+(A) Min Size for Algorithmic Differences
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Determine the size of input array does one start to see a measurable
+  difference in the performance of the linear and logarithmic
+  algorithms.  Produce a timing table which includes all algorithms
+  which clearly demonstrates an uptick in the times associated with some
+  while others remain much lower.  Identify what size this appears to be
+  a occur.
+  rossi239@csel-apollo:/home/rossi239/csci2021/c2021/a4-code $ ./search_benchmark 1 20 20
+    LENGTH  SEARCHES          array           list         binary           tree
+         2        80     4.0000e-06     4.0000e-06     3.0000e-06     3.0000e-06
+         4       160     9.0000e-06     1.1000e-05     1.0000e-05     9.0000e-06
+         8       320     4.2000e-05     4.9000e-05     3.7000e-05     3.6000e-05
+        16       640     2.6700e-04     2.5900e-04     1.6800e-04     2.0800e-04
+        32      1280     2.0740e-03     2.8900e-03     7.9900e-04     7.0900e-04
+        64      2560     1.5368e-02     2.7909e-02     4.5210e-03     3.2870e-03
+       128      5120     1.0086e-01     2.1455e-01     3.1459e-02     1.5319e-02
+       256     10240     7.1055e-01     1.6737e+00     2.1604e-01     1.4813e-01
+       512     20480     5.2824e+00     1.3269e+01     1.0680e+00     7.5601e-01
+It appears that major time differences begin to occur around size 64.
+At this point the difference between the O(n) algorithms (array/list) and the
+O(log n) algorithms (binary/tree) is in the range of 4-8 times different
+from each other. Following this, the gap between the two types of algorithms just
+gets wider and wider.
+
+(B) Linear Search in List vs Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Determine whether the linear array and linked list search remain
+  approximately at the same performance level as size increases to large
+  data or whether one begins to become favorable over other. Determine
+  the approximate size at which this divergence becomes obvious. Discuss
+  reasons WHY this difference arises.
+
+  rossi239@csel-apollo:/home/rossi239/csci2021/c2021/a4-code $ ./search_benchmark 1 20 20
+    LENGTH  SEARCHES          array           list         binary           tree
+         2        80     4.0000e-06     4.0000e-06     3.0000e-06     3.0000e-06
+         4       160     9.0000e-06     1.1000e-05     1.0000e-05     9.0000e-06
+         8       320     4.2000e-05     4.9000e-05     3.7000e-05     3.6000e-05
+        16       640     2.6700e-04     2.5900e-04     1.6800e-04     2.0800e-04
+        32      1280     2.0740e-03     2.8900e-03     7.9900e-04     7.0900e-04
+        64      2560     1.5368e-02     2.7909e-02     4.5210e-03     3.2870e-03
+       128      5120     1.0086e-01     2.1455e-01     3.1459e-02     1.5319e-02
+       256     10240     7.1055e-01     1.6737e+00     2.1604e-01     1.4813e-01
+       512     20480     5.2824e+00     1.3269e+01     1.0680e+00     7.5601e-01
+
+It appears the divergence begins very early on at around 32. The two Algorithms
+stay relatively steady at array being two times faster than list, but slowly it
+looks like array will continue to get even more fast than list. I believe this
+difference arises because in the creation of our array, each value is very close
+to the next in memory due to the layout of arrays within memory. But with linked Lists
+we have a placed gap of memory allocation between each node so this takes the processor
+extra time to travel from one node to the next, seeing if the query is in that following one.
+
+(C) Binary Search in Tree vs Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Compare the binary array search and binary tree search on small to
+  very large arrays. Determine if there is a size at which the
+  performance of these two begins to diverge. If so, describe why this
+  might be happening based on your understanding of the data structures
+  and the memory system. If not, describe why you believe there is
+  little performance difference between the two.
+
+  rossi239@csel-apollo:/home/rossi239/csci2021/c2021/a4-code $ ./search_benchmark 5 15 1
+    LENGTH  SEARCHES          array           list         binary           tree
+        32        64     1.0600e-04     1.4800e-04     4.8000e-05     4.2000e-05
+        64       128     7.6600e-04     1.4150e-03     2.8000e-04     1.8400e-04
+       128       256     5.0320e-03     1.0780e-02     1.7450e-03     9.0200e-04
+       256       512     3.5459e-02     8.3570e-02     1.0856e-02     7.6050e-03
+       512      1024     2.6354e-01     6.6181e-01     5.3800e-02     3.7966e-02
+      1024      2048     2.0287e+00     6.4439e+00     2.0600e-01     1.7923e-01
+
+  At the beginning of the trustable times (times > 1e-03) we can see that as the
+  tables size grow there is very little difference between the two's times. I believe
+  these two have very little performance difference because they are essentially accessing
+  memory the same in their search algorithms. Even though the binary test on an array has
+  the data laid out sequentially, the function still jumps around to different parts of the
+  array, much like how the BST must jump around to different nodes in memory for its search
+  algorithm.
+
+
+
+(D) Caching Effects on Algorithms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  It is commonly believed that memory systems that feature a Cache will
+  lead to arrays performing faster than linked structures such as Linked
+  Lists and Binary Search Trees. Describe whether your timings confirm
+  or refute this belief.  Address both types of algorithms in your
+  answer:
+  - What effects does Cache have on Linear Search in arrays and lists
+    and why?
+
+    Cache allows the linear search to function much quicker in arrays because
+    the data is grouped closely together so through spatial locality the array
+    stores more data in Cache. Therefore allowing for quicker data retrieval than
+    that of the linked list which has its data spread throughout memory.
+
+  - What effects does Cache have on Binary Search in arrays and trees
+    and why?
+
+    Cache doesn't have much affect on the binary searches because they will
+    most likely have Cache misses over and over until finding the correct element
+    and that time just adds up, equaling out the effectiveness of the binary search
+    in the array and the BST.
+
+
+
+(E) OPTIONAL MAKEUP CREDIT
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  If you decided to make use of a table of function pointers/structs
+  which is worth makeup credit, describe your basic design for this
+  below.

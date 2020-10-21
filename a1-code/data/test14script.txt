@@ -1,0 +1,59 @@
+put Kyle alive
+put Kenny dead
+put Stan alive
+put Cartman jerk
+put Timmy TIMMY!
+put MrGarrison odd
+put MrHat very-odd
+put Butters lovable
+put Chef disavowed
+structure
+expand
+structure
+save test-data/stress1.tmp
+put Token dude
+put Wendy gal
+put Jimmy crutches
+put Damien evil
+put Santa bad
+put Jesus good
+put Marvin starvin
+put Kenny ALIVE
+put MrHat MrStick
+structure
+expand
+expand
+structure
+save test-data/stress2.tmp
+load test-data/stress1.tmp
+structure
+get Santa
+get Marvin
+get Cartman
+get MrHat
+put Syndney Portier
+put Robert Smith
+expand
+expand
+expand
+structure
+get Cartman
+get Robert
+save test-data/stress3.tmp
+load test-data/stress2.tmp
+print
+structure
+get MrGarrison
+get MrHat
+get Kenny
+get Santa
+get Wendy
+get Marvin
+get Sydney
+put Kenny dead
+load test-data/stress3.tmp
+get Kenny
+structure
+expand
+structure
+quit
