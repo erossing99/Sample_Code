@@ -1,0 +1,283 @@
+<html>
+  <head>
+    <title>MyServer</title>
+    <style>
+        div{
+            text-align:center;
+            margin-bottom: 5%;
+        }
+        #links ul li{
+            display: inline;
+            margin-right: 30px;
+        }
+        label{
+          margin-right: 5px;
+        }
+
+        body{
+          background-color: #e8e8e8;
+        }
+
+        h1, th, td, nav, p, li, input, label{
+          font-family: "Courier New", monospace;
+        }
+
+        table.nav{
+          background-color: #495464;
+          width: 100%;
+          border: none;
+        }
+
+        td.nav{
+          float: left;
+          border-right: 2px solid #2b313b;
+        }
+
+        a.nav{
+          display: block;
+          padding: 8px;
+          color: #f1e3dd;
+          text-decoration: none;
+          font-weight: bold;
+        }
+
+        td.nav:hover{
+          background-color: #2b313b;
+        }
+
+        #contacts tr:nth-child(even){
+          background-color: #bbbfca;
+          border: 1px solid black;
+        }
+
+        #contacts tr:nth-child(odd){
+          background-color: #f4f4f2;
+        }
+
+        #contacts th{
+          background-color: #bbbfca;
+        }
+
+        #contacts td, #contacts th{
+          border: 1px solid black;
+          padding: 5px;
+        }
+
+        #contacts{
+          border-collapse: collapse;
+          display: inline-block;
+          width: 70%;
+          float:left;
+          margin-bottom: 15px;
+        }
+
+        #goldyWidget{
+          margin-left: auto;
+          margin-right: auto;
+          display: inline;
+        }
+
+        #goldy{
+          display: block;
+          width: 25%;
+          /* float: left; */
+          margin-left: auto;
+          margin-right: auto;
+          /* padding-left: 20px; */
+        }
+
+        #randomSpinTable{
+          /* margin-left: 112px; */
+          display: inline-block;
+          margin-left: 10%;
+        }
+
+        #randomButton{
+          font-family: "Courier New", monospace;
+          font-weight: bold;
+        }
+
+        #spinButton{
+          font-family: "Courier New", monospace;
+          font-weight: bold;
+        }
+
+        html, body{
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        #spaceFiller{
+          display: inline-block;
+          width: 40%;
+        }
+
+        #left-panel{
+          float: left;
+          display: none;
+          width: 25%;
+          height: 60%;
+          overflow: auto;
+          background: white;
+          margin-top: 17px;
+        }
+
+        #map{
+          float: left;
+          display: inline-block;
+          height: 60%;
+          width: 50%;
+        }
+
+        #mapTools{
+          background: #bbbfca;
+          float: left;
+          display: inline-block;
+          width: 20%;
+          border: 1px solid black;
+        }
+
+        #mapsInput{
+          display: inline-block;
+          border-bottom: 1px solid black;
+        }
+        #directionsInput{
+          display: inline-block;
+        }
+
+        .formMap {
+          float: right;
+        }
+
+        #contactForm{
+          display: inline-block;
+          width: 25%;
+          margin-top: 5px;
+          position: relative;
+          left: 30%;
+          transform: translateX(-50%);
+        }
+
+        #FormTable table{
+          margin: auto;
+          width: 50%;
+        }
+
+        #FormTable td{
+          border: 1px solid black;
+          padding: 10px;
+        }
+
+        #FormTable tr{
+          border: 1px solid black;
+        }
+
+        .ContactLabel{
+          font-weight: bold;
+        }
+
+        #submitButton{
+          background-color: MediumSeaGreen;
+          width: 170px;
+          height: 2em;
+          font-weight: bold;
+        }
+
+        #category{
+          width: 170px;
+        }
+
+        .grid-container{
+          display: grid;
+          grid-template-columns: auto auto;
+        }
+
+        .grid-item{
+          margin: 20px;
+        }
+
+        #passwordHeader{
+          color: #f1e3dd;
+          margin-left: 26px;
+          margin-top: 5px;
+          padding-left: 30px;
+          padding-right: 30px;
+          text-align: center;
+          position: absolute;
+          border-radius: 5px;
+          max-width: 40%;
+          background-color:#495464;
+        }
+
+        #passwordContent{
+          color: #495464;
+          max-width: 40%;
+          text-align: center;
+          margin-top: 68px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 26px;
+          position: absolute;
+        }
+
+        #passwordChecker{
+          border: 2px solid #495464;
+          border-radius: 5px;
+          width: 400px;
+          height: 120px;
+          background-color: white;
+        }
+
+        hr.solid {
+          border-top: 3px solid #495464;
+        }
+
+        #widgetTitle{
+          text-align: center;
+        }
+    </style>
+  </head>
+
+  <table class="nav">
+    <tr>
+      <td class="nav">
+        <a class="nav" href="contacts_hw1.html">My Contacts</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="MyForm.html">Form Input</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="widgets_hw1.html">My Widgets</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="MyServer.html">My Server</a>
+      </td>
+    </tr>
+  </table>
+
+  <body>
+  <center>
+    <h1>MyServer Page</h1></br>
+  </center>
+  <div id='links'>
+    <ul>
+        <li> <a href="http://localhost:9001/Coffman.html"> Coffman Picture</a> </li>
+        <li> <a href="http://localhost:9001/Coffman_N_OuttaSpace.html"> Coffman + OuttaSpace</a> </li>
+        <li> <a href="http://localhost:9001/OuttaSpace.html"> OuttaSpace MP3</a> </li>
+    </ul>
+  </div>
+
+  <div>
+    <form action="http://localhost:9001/redirect" method="GET">
+      <label for="searchInput">Redirect to YouTube: </label>
+      <input type='text' name='query_string' id='searchInput' required/>
+      <button type='submit'> Search </button>
+    </form>
+  </div>
+<hr>
+  <div>
+    <a href="MyForm.html"> Go to MyForm page</a>
+  </div>
+  </body>
+</html>

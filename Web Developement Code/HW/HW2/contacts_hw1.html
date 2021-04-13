@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>My Contacts</title>
+    <link rel="stylesheet" href="hwStyle.css">
+    <script>
+      function chgimg(name, txt, smallimg) {
+        var theimage = document.getElementById("goldy");
+        var small = document.getElementById(smallimg);
+        small.style.visibility = "visible";
+        theimage.src = name;
+        theimage.alt = txt;
+      }
+
+      function hideSmallImg(smallimg){
+        var small = document.getElementById(smallimg);
+        small.style.visibility = "hidden";
+      }
+
+    </script>
+  </head>
+
+  <table class="nav">
+    <tr>
+      <td class="nav">
+        <a class="nav" href="contacts_hw1.html">My Contacts</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="MyForm.html">Form Input</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="widgets_hw1.html">My Widgets</a>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+    <h1>My University Contacts</h1>
+    <table id="contacts">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>Contact Information</th>
+          <th>email</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onmouseover="chgimg('kellerhall.jpg', 'Keller Hall','smallKeller2')" onmouseout="hideSmallImg('smallKeller2')">
+          <td>Josie Kahlenbeck</td>
+          <td>Academic</td>
+          <td>4-192 Keller Hall<br>200 Union Street SE<br>Minneapolis, MN 55455</td>
+          <td>Computer Science Undergraduate Advisor<br>
+            <img id="smallKeller2" src="kellerhall.jpg" alt="Keller Hall">
+          </td>
+          <td>
+            <a href="mailto:kahle048@umn.edu">kahle048@umn.edu</a>
+          </td>
+          <td>
+            <a href="https://cse.umn.edu/cs/undergraduate-advising">CSCI Undergraduate Advising Home Page</a>
+          </td>
+        </tr>
+        <tr onmouseover="chgimg('northrop.jpg', 'Northrop Auditorium','smallNorthrop')" onmouseout="hideSmallImg('smallNorthrop')">
+          <td>Kristen Brogdon</td>
+          <td>Industry</td>
+          <td>Northrop Auditorium<br>84 Church Street SE<br>Minneapolis, MN 55455</td>
+          <td>Supervisor at Northrop Programming Department<br>
+            <img id="smallNorthrop" src="northrop.jpg" alt="Northrop Auditorium">
+          </td>
+          <td>
+            <a href="mailto:kbrogdon@umn.edu">kbrogdon@umn.edu</a>
+          </td>
+          <td>
+            <a href="http://www.northrop.umn.edu/about/contact-us/kristen-brogdon">Kristen's Contact Page</a>
+          </td>
+        </tr>
+        <tr onmouseover="chgimg('reccenter.jpg', 'UMN Recwell', 'smallReccenter')" onmouseout="hideSmallImg('smallReccenter')">
+          <td>UMN Climbing</td>
+          <td>Personal</td>
+          <td>UMN Recwell<br>123 SE Harvard Street<br>Minneapolis, MN 55455</td>
+          <td>Rec Center Climbing Gym<br>
+            <img id="smallReccenter" src="reccenter.jpg" alt="UMN Recwell">
+          </td>
+          <td>
+            <a href="mailto:outdoor@umn.edu">outdoor@umn.edu</a>
+          </td>
+          <td>
+            <a href="http://recwell.umn.edu/outdoor-adventures/climbing">UMN Climbing Homepage</a>
+          </td>
+        </tr>
+        <tr onmouseover="chgimg('kellerhall.jpg', 'Keller Hall','smallKeller')" onmouseout="hideSmallImg('smallKeller')">
+          <td>Department of Computer Science</td>
+          <td>Academic</td>
+          <td>4-192 Keller Hall<br>200 Union Street SE<br>Minneapolis, MN 55455</td>
+          <td>Department of my current major<br>
+            <img id="smallKeller" src="kellerhall.jpg" alt="Keller Hall">
+          </td>
+          <td>
+            <a href="mailto:csdesk@umn.edu">csdesk@umn.edu</a>
+          </td>
+          <td>
+            <a href="https://cse.umn.edu/cs">Department Home Page</a>
+          </td>
+        </tr>
+        <tr onmouseover="chgimg('themarshall.jpg', 'The Marshall','smallMarshall')" onmouseout="hideSmallImg('smallMarshall')">
+          <td>Jack Fehrs: CSE Peer</td>
+          <td>Personal</td>
+          <td>The Marshall<br>515 14 Avenue SE<br>Minneapolis, MN 55414</td>
+          <td>A confidant and good friend of mine<br>
+            <img id="smallMarshall" src="themarshall.jpg" alt="The Marshall">
+          </td>
+          <td>
+            <a href="mailto:fehrs005@umn.edu">fehrs005@umn.edu</a>
+          </td>
+          <td>
+            <a href="https://www.linkedin.com/in/jack-fehrs-83b2061a2/">Jack's linkedIn</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <img id="goldy" src="gophers-mascot.png" alt="Goldy Gopher">
+    </div>
+    <div>
+      <input id="randomButton" type="button" value="Random">
+    </div>
+    <div>
+      <input id= "spinButton" type="button" value="Spin">
+    </div>
+
+</html>

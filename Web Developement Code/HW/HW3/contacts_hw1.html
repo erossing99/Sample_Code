@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>My Contacts</title>
+    <link rel="stylesheet" href="hwStyle.css">
+    <!-- <script type="text/javascript" src="scripts.js">
+    </script> -->
+  </head>
+
+  <table class="nav">
+    <tr>
+      <td class="nav">
+        <a class="nav" href="contacts_hw1.html">My Contacts</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="MyForm.html">Form Input</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="widgets_hw1.html">My Widgets</a>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+    <h1>My University Contacts</h1>
+    <table id="contacts">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>Contact Information</th>
+          <th>Email</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="row1_Name">Josie Kahlenbeck</td>
+          <td>Academic</td>
+          <td id="row1_Address">4-192 Keller Hall<br>200 Union Street SE<br>Minneapolis, MN 55455</td>
+          <td id="row1_ContactInfo">Computer Science Undergraduate Advisor</td>
+          <td>
+            <a href="mailto:kahle048@umn.edu">kahle048@umn.edu</a>
+          </td>
+          <td>
+            <a href="https://cse.umn.edu/cs/undergraduate-advising">CSCI Undergraduate Advising Home Page</a>
+          </td>
+        </tr>
+        <tr>
+          <td id="row2_Name">Kristen Brogdon</td>
+          <td>Industry</td>
+          <td id="row2_Address">Northrop Auditorium<br>84 Church Street SE<br>Minneapolis, MN 55455</td>
+          <td id="row2_ContactInfo">Supervisor at Northrop Programming Department</td>
+          <td>
+            <a href="mailto:kbrogdon@umn.edu">kbrogdon@umn.edu</a>
+          </td>
+          <td>
+            <a href="http://www.northrop.umn.edu/about/contact-us/kristen-brogdon">Kristen's Contact Page</a>
+          </td>
+        </tr>
+        <tr>
+          <td id="row3_Name">UMN Climbing</td>
+          <td>Personal</td>
+          <td id="row3_Address">UMN Recwell<br>123 SE Harvard Street<br>Minneapolis, MN 55455</td>
+          <td id="row3_ContactInfo">Rec Center Climbing Gym</td>
+          <td>
+            <a href="mailto:outdoor@umn.edu">outdoor@umn.edu</a>
+          </td>
+          <td>
+            <a href="http://recwell.umn.edu/outdoor-adventures/climbing">UMN Climbing Homepage</a>
+          </td>
+        </tr>
+        <tr>
+          <td id="row4_Name">Department of Computer Science</td>
+          <td>Academic</td>
+          <td id="row4_Address">4-192 Keller Hall<br>200 Union Street SE<br>Minneapolis, MN 55455</td>
+          <td id="row4_ContactInfo">Department of my current major</td>
+          <td>
+            <a href="mailto:csdesk@umn.edu">csdesk@umn.edu</a>
+          </td>
+          <td>
+            <a href="https://cse.umn.edu/cs">Department Home Page</a>
+          </td>
+        </tr>
+        <tr>
+          <td id="row5_Name">Jack Fehrs: CSE Peer</td>
+          <td>Personal</td>
+          <td id="row5_Address">The Marshall<br>515 14 Avenue SE<br>Minneapolis, MN 55414</td>
+          <td id="row5_ContactInfo">A confidant and good friend of mine</td>
+          <td>
+            <a href="mailto:fehrs005@umn.edu">fehrs005@umn.edu</a>
+          </td>
+          <td>
+            <a href="https://www.linkedin.com/in/jack-fehrs-83b2061a2/">Jack's linkedIn</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="goldyWidget">
+      <img id="goldy" src="gophers-mascot.png" alt="Goldy Gopher">
+      <br>
+      <table id="randomSpinTable">
+        <tr>
+          <td>
+            <button id="randomButton" onclick="randomImage()">Random</button>
+          </td>
+          <td>
+            <button id= "spinButton" onclick="startRotate()">Spin</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="spaceFiller"></div>
+
+    <div id="left-panel"></div>
+    <div id="map"></div>
+    <div id="mapTools">
+    <table id="mapsInput">
+      <tr>
+        <td>Find
+          <select name="placeType" id="placeSelection" onchange="enableOtherPlace()">
+          <option value="">Choose</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="hospital">Hospital</option>
+          <option value="parking">Parking</option>
+          <option value="supermarket">Supermarket</option>
+          <option value="other">Other</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><input type="text" id="otherPlace" name="otherPlace" placeholder="Enter Other Places" disabled></td>
+      </tr>
+      <tr>
+        <td>In <input type="text" id="searchRadius" name="searchRadius" placeholder="500"> meters</td>
+      </tr>
+      <tr>
+        <td><button id="mapSearchButton" onclick="placeSearch()">Search</button></td>
+      </tr>
+    </table>
+    <table id="directionsInput">
+      <tr>
+        <td>Direction to <input type="text" id="destination" name="destination" placeholder="Enter Destination">by</td>
+      </tr>
+      <tr>
+        <td>
+          <label for="walk">WALK</label>
+          <input type="radio" id="walk" name="transport" value="walk" checked><br>
+          <label for="drive">DRIVE</label>
+          <input type="radio" id="drive" name="transport" value="drive"><br>
+          <label for="transit">TRANSIT</label>
+          <input type="radio" id="transit" name="transport" value="transit">
+        </td>
+      </tr>
+      <tr>
+        <td><button id="directionsSearchButton" onclick="getPosition()">Go</button></td>
+      </tr>
+    </table>
+  </div>
+  <script type="text/javascript" src="scripts.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL-QiFpKmtThdBUuJgcUUZBoGqVqDF5Oo&libraries=places&callback=initMap" async defer></script>
+
+</html>

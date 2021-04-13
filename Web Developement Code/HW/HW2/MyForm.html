@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>My Contacts</title>
+    <link rel="stylesheet" href="hwStyle.css">
+  </head>
+
+  <table class="nav">
+    <tr>
+      <td class="nav">
+        <a class="nav" href="contacts_hw1.html">My Contacts</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="MyForm.html">Form Input</a>
+      </td>
+      <td class="nav">
+        <a class="nav" href="widgets_hw1.html">My Widgets</a>
+      </td>
+    </tr>
+  </table>
+
+  <form id= "contactForm" name="form" method="post" action="http://www-users.cselabs.umn.edu/~joh13266/echo.php">
+    <table id="FormTable">
+      <tr>
+        <td><label class="ContactLabel" for="name">Name</label></td>
+        <td><input class="ContactInput" type="text" id="name" name="name" required pattern="[A-Za-z0-9\s]+" title="Contact's name must be alphanumeric"></td>
+      </tr>
+      <tr>
+        <td><label class="ContactLabel" for="category">Category</label></td>
+        <td><select id="category" name="category" required>
+          <option value="">Choose</option>
+          <option value="academic">Academic</option>
+          <option value="industry">Industry</option>
+          <option value="personal">Personal</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><label class="ContactLabel" for="location">Location</label></td>
+        <td><input class="ContactInput" type="text" id="location" name="location" required></td>
+      </tr>
+      <tr>
+        <td><label class="ContactLabel" for="contact">Contact Information</label></td>
+        <td><input class="ContactInput" type="text" id="contact" name="contact" required></td>
+      </tr>
+      <tr>
+        <td><label class="ContactLabel" for="email">Email</label></td>
+        <td><input class="ContactInput" type="text" id="email" name="email" required></td>
+      </tr>
+      <tr>
+        <td><label class="ContactLabel" for="website">Website</label></td>
+        <td><input class="ContactInput" type="url" id="website" name="website" required></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input id="submitButton" type="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
