@@ -1,0 +1,76 @@
+﻿<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li><a href="welcome"><b>Home</b></a></li>
+          <li><a href="contacts"><b>Contacts</b></a></li>
+          <li><a href="addContact"><b>Add Contact</b></a></li>
+          <li><a href="stock"><b>Stock Page</b></a></li>
+          <li><a href="logout"><img src="logout.png" style="height:20px; width:20px;"></a>
+        </ul>
+      </div>
+    </nav>
+    <br><br>
+
+    <div class="container">
+      <table class="table" id="contactsTable">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Location</th>
+            <th scope="col">Contact Information</th>
+            <th scope="col">Email</th>
+            <th scope="col">Website <br> (URL) </th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <script type="text/javascript">
+     /* TODO Fill this script in with a request to your server to GET contacts.json
+     /  and display it in the contactsTable.
+     /*/
+  	 function processContactsJson(){
+       $(document).ready(function(){
+         $.get('/contactTable', function(data, status){
+           createNdisplaycontacts(data);
+         });
+       });
+  	 }
+
+  	 // This function loops through the array and builds a big string
+  	 // embedding the information in the contacts array into rows in a table using
+  	 // the html tr and td, and then appends the string to the table body
+  	 function createNdisplaycontacts(cArray) {
+  	   // initialize string you will append to the table body
+  	   var outstring = '';
+       var i;
+       for (i = 0; i < cArray.length; i++){
+         var contactObj = cArray[i];
+         outstring += "<tr>";
+         outstring += "<td>" + contactObj.name + "</td>";
+         outstring += "<td>" + contactObj.category + "</td>";
+         outstring += "<td>" + contactObj.location + "</td>";
+         outstring += "<td>" + contactObj.contact_info + "</td>";
+         outstring += "<td>" + "<a href='mailto: " + contactObj.email + "'>" + contactObj.email + "</a>" + "</td>";
+         outstring += "<td>" + "<a href='" + contactObj.website_url + "'>" + contactObj.website + '</a>' + "</td>";
+         outstring += "</tr>";
+       }
+       var tablebody = document.getElementById('tableBody');
+       tablebody.innerHTML = outstring;
+  	 }
+
+  	 window.onload = processContactsJson();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="crossorigin="anonymous"></script>
+    <style>
+      #myForm, h1, p {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li><a href="welcome"><b>Home</b></a></li>
+          <li><a href="contacts"><b>Contacts</b></a></li>
+          <li><a href="addContact"><b>Add Contact</b></a></li>
+          <li><a href="stock"><b>Stock Page</b></a></li>
+          <li><a href="logout"><img src="logout.png" style="height:20px; width:20px;"></a>
+        </ul>
+      </div>
+    </nav>
+    <br><br>
+
+    <h1>Login Page</h1>
+    <p>Please enter your user name and password. Both are case sensitive.</p>
+    <form id="myForm" name="myForm">
+      <div>
+        <label for="login">Login:</label> <br>
+        <input type="text" id="login" name="login" required>
+      </div>
+      <div>
+        <label for="password">Password:</label> <br>
+        <input type="text" id="password" name="password" required>
+      </div>
+      <div>
+        <p id="errorMessage" style="display: none; color: red;">Incorrect Password or Login</p>
+      </div>
+      <input type="submit" value="Submit!">
+    </form>
+
+    <script>
+
+    $(document).ready(function(){
+      $('#myForm').submit(function(eventObj){
+        eventObj.preventDefault();
+        var login = $('#login').val();
+        var password = $('#password').val();
+        $.post('/checkLogin',
+        {"login": login, "password": password},
+        function(data){
+          console.log(data);
+          if (data.status === 'success'){
+            //make sure error message is not displayed
+            $('#errorMessage').hide();
+            //Re-Direct to contacts Page
+            window.location.href = 'contacts';
+          }
+          else{
+            //display error message
+            $('#errorMessage').show();
+          }
+        });
+      });
+    });
+
+    </script>
+
+  </body>
+</html>
